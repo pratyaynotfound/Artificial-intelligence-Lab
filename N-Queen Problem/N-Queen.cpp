@@ -1,6 +1,6 @@
 #include<iostream>
 #include<algorithm>  // for std::fill
-#define N 17
+#define N 4
 int count = 0;
 
 bool isSafe(int (&board)[N], int row, int col);
@@ -57,6 +57,7 @@ bool isSafe(int (&board)[N], int row, int col) {
 
 bool solveNQ(int (&board)[N], int row) {
     if (row == N) {
+        printSol(board);
         count++;
         return true;
     }
