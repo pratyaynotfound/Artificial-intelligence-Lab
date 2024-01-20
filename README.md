@@ -29,5 +29,5 @@ Explore the solution code, documentation, and any other relevant files in the [N
 
 The Missionaries and Cannibals problem is a classic river-crossing puzzle. The problem involves three missionaries and three cannibals who must cross a river using a boat. The challenge is to find a sequence of moves that safely transports all individuals from one side of the river to the other. The constraints are that at no point can the number of cannibals on either side outnumber the number of missionaries, and the boat has limited capacity.
 
-Explore the solution code, documentation, and any other relevant files in the [Missionaries and Cannibals Problem](MandCP.cpp) folder.
+Explore the solution code, documentation, and any other relevant files in the [Missionaries and Cannibals Problem](Missionaries-and-Cannibals) folder.
 
