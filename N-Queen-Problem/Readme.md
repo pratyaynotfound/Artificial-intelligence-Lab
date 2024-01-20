@@ -16,7 +16,7 @@ Write a program to solve the 8-queens problem. The goal of the 8-queens problem 
 3. Generalize your program to solve n queens problem. What is the maximum n that your program can solve in reasonable time (less than 30 mins).
 
 ### Solution:
-Here is the solution for [N-Queens Problem](N-Queen-Problem/N-Queen.cpp)
+Here is the solution for [N-Queens Problem](N-Queen.cpp)
 
 ## Output
 Output is given as below.
