@@ -1,14 +1,15 @@
 #include<MandCP.h>
 
 //check if the state is safe or not
-bool is_Safe(State &a){
-    if(a.numMissLeft<a.numCanbLeft && a.numMissRignt<a.numCanbRight)
-        return true;
+bool is_Safe(State &a, State& goal){
+    if((a.numMissLeft<a.numCanbLeft) || (a.numMissRignt<a.numCanbRight) || (a.numCanbLeft+a.numCanbRight>goal.numCanbRight+goal.numCanbLeft)|| (a.numMissLeft+a.numMissRignt>goal.numMissRignt+goal.numMissLeft))
+        return false;
+    return true;
 }
 
 //is goal state or not
-bool is_goal(State &g){
-    if(g.numMissLeft == 0 && g.numCanbLeft == 0 && g.boatAtLeft == false)
+bool is_goal(State &g, State &goal){
+    if(g == goal)
         return true;
 }
 
@@ -31,10 +32,29 @@ int get_total_moves(){
 
 //for determining the valid moves
 std::vector<std::pair<int,int>> valid_moves(State& current_state){
+    std::vector<std::pair<int,int>> valid_move;
+    State temp;
+    if(current_state.boatAtLeft){
+        for(auto move: moves){
+            temp.numCanbLeft = current_state.numCanbLeft - move.first;
+            temp.numMissLeft = current_state.numMissLeft - move.second;
 
+            temp.numCanbRight = current_state.numCanbRight + move.first;
+            temp.numMissRignt = current_state.numMissRignt + move.second;
+
+            if(is_Safe(temp)){
+                valid_move.push_back(move);
+            }
+        }
+    }
 }
 
 //get the next state
 std::set<State> nextState(State &p){
+
+}
+
+//solve
+bool solve(State& init, State& goal){
 
 }
