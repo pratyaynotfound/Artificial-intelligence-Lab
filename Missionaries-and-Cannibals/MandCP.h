@@ -1,22 +1,24 @@
+#ifndef MANDCP_H
+#define MANDCP_H
+
 #include<iostream>
 #include<vector>
 #include<cassert>
+#include<set>
 
-class State{
-    private:
-    unsigned int miss;
-    unsigned int canb;
+struct State{
+    unsigned int numMiss;
+    unsigned int numCanb;
     bool boatAtLeft;
-
-    public:
-    State(unsigned int,unsigned int,bool);
-
-    bool is_Safe();
-    bool is_goal() const;
-    void printState();
-    int get_total_moves();
-    std::vector<State> nextState();
-    bool solve();
-
 };
 
+unsigned int tmoves = 0;
+
+bool is_Safe(State);
+bool is_goal(State);
+void print_state(State);
+int get_total_moves();
+std::set<State> nextState(State);
+bool solve();
+
+#endif MANDCP_H
