@@ -31,8 +31,8 @@ int get_total_moves(){
 }
 
 //for determining the valid moves
-std::vector<std::pair<int,int>> valid_moves(State& current_state){
-    std::vector<std::pair<int,int>> valid_move;
+Moves valid_moves(State& current_state){
+    Moves valid_move;
     State temp;
     if(current_state.boatAtLeft){
         for(auto move: moves){
@@ -50,8 +50,9 @@ std::vector<std::pair<int,int>> valid_moves(State& current_state){
 }
 
 //get the next state
-std::set<State> nextState(State &p){
-
+std::set<State> get_next_state(State &p){
+    Moves valid = valid_moves(p);
+    
 }
 
 //solve
