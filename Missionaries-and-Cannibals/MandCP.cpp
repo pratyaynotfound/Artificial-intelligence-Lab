@@ -34,8 +34,8 @@ int get_total_moves(){
 Moves valid_moves(State& current_state){
     Moves valid_move;
     State temp;
-    if(current_state.boatAtLeft){
-        for(auto move: moves){
+    for(auto move: moves){
+        if(current_state.boatAtLeft){
             temp.numCanbLeft = current_state.numCanbLeft - move.first;
             temp.numMissLeft = current_state.numMissLeft - move.second;
 
@@ -46,16 +46,57 @@ Moves valid_moves(State& current_state){
                 valid_move.push_back(move);
             }
         }
+        else{
+            temp.numCanbLeft = current_state.numCanbLeft + move.first;
+            temp.numMissLeft = current_state.numMissLeft + move.second;
+
+            temp.numCanbRight = current_state.numCanbRight - move.first;
+            temp.numMissRignt = current_state.numMissRignt - move.second;
+
+            if(is_Safe(temp)){
+                valid_move.push_back(move);
+            }
+        }
+        
     }
 }
 
+//get a move by one state and a valid move 
+State move_state(State& current,Move& this_move){
+    State temp_move;
+
+    if(current.boatAtLeft){
+        temp_move.numCanbLeft = current.numCanbLeft - this_move.first;
+        temp_move.numMissLeft = current.numMissLeft - this_move.second;
+
+        temp_move.numCanbRight = current.numCanbRight + this_move.first;
+        temp_move.numMissRignt = current.numMissRignt + this_move.second;
+    }
+    else{
+        temp_move.numCanbLeft = current.numCanbLeft + this_move.first;
+        temp_move.numMissLeft = current.numMissLeft + this_move.second;
+
+        temp_move.numCanbRight = current.numCanbRight - this_move.first;
+        temp_move.numMissRignt = current.numMissRignt - this_move.second;
+    }
+
+    return temp_move;
+}
+
 //get the next state
-std::set<State> get_next_state(State &p){
+std::vector<State> get_next_state(State &p){
     Moves valid = valid_moves(p);
-    
+    std::vector<State> set_of_states;
+    for(auto move: valid){
+        State new_state = move_state(p,move);
+
+        set_of_states.push_back(new_state);
+    }
+
+    return set_of_states;
 }
 
 //solve
 bool solve(State& init, State& goal){
-
+    
 }

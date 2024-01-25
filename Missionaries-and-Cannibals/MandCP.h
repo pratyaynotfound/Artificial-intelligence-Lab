@@ -5,7 +5,8 @@
 #include<vector>
 #include<cassert>
 #include<set>
-typedef std::vector<std::pair<int, int>> Moves;
+typedef std::pair<int,int> Move;
+typedef std::vector<Move> Moves;
 Moves moves = {{0, 1}, {0, 2}, {1, 1}, {1, 0}, {2, 0}};
 
 struct State{
@@ -31,7 +32,8 @@ void print_state(State&);
 int get_total_moves();
 
 std::vector<std::pair<int,int>> valid_moves(State&);
-std::set<State> get_next_state(State&);
+State move_state(State&,Move&);
+std::vector<State> get_next_state(State&);
 bool solve(State&, State&);
 
 
