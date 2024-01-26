@@ -151,7 +151,6 @@ bool solve(const State& init, const State& goal) {
 
         std::vector<State> next_states = get_next_state(current);
         for (const auto& next_state : next_states) {
-            
             if (explored.find(next_state) == explored.end()) {
                 q.push(next_state);
                 explored.insert(next_state);
