@@ -3,39 +3,56 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
 #include<set>
-typedef std::pair<int,int> Move;
-typedef std::vector<Move> Moves;
-Moves moves = {{0, 1}, {0, 2}, {1, 1}, {1, 0}, {2, 0}};
+#include<queue>
 
-struct State{
-    unsigned int numMissLeft,numMissRignt;
-    unsigned int numCanbLeft,numCanbRight;
+typedef std::pair<int, int> Move;
+
+struct State {
+    unsigned int numMissLeft;
+    unsigned int numCanbLeft;
+    unsigned int numMissRignt;
+    unsigned int numCanbRight;
     bool boatAtLeft;
 
     bool operator==(const State& other) const {
-    return 
-        numMissLeft == other.numMissLeft &&
-        numMissRignt == other.numMissRignt &&
-        numCanbLeft == other.numCanbLeft &&
-        numCanbRight == other.numCanbRight &&
-        boatAtLeft == other.boatAtLeft;
+        return (
+            numMissLeft == other.numMissLeft &&
+            numMissRignt == other.numMissRignt &&
+            numCanbLeft == other.numCanbLeft &&
+            numCanbRight == other.numCanbRight &&
+            boatAtLeft == other.boatAtLeft);
+    }
+
+    bool operator<(const State& other) const {
+        // You can choose any criteria for ordering State objects here
+        if (numMissLeft != other.numMissLeft)
+            return numMissLeft < other.numMissLeft;
+        if (numMissRignt != other.numMissRignt)
+            return numMissRignt < other.numMissRignt;
+        if (numCanbLeft != other.numCanbLeft)
+            return numCanbLeft < other.numCanbLeft;
+        if (numCanbRight != other.numCanbRight)
+            return numCanbRight < other.numCanbRight;
+        return boatAtLeft < other.boatAtLeft;
     }
 };
 
-unsigned int tmoves = 0;
+// External declaration of global variables and functions
+extern std::vector<Move> moves;
+extern State goal_state;
+extern unsigned int tmoves;
 
-bool is_Safe(State&);
-bool is_goal(State&, State&);
-void print_state(State&);
-int get_total_moves();
+// Function declarations
+void initialize_moves();
+bool is_safe(const State&);
+bool is_goal(const State&);
+void print_state(const State&);
+unsigned int get_total_moves();
 
-std::vector<std::pair<int,int>> valid_moves(State&);
-State move_state(State&,Move&);
-std::vector<State> get_next_state(State&);
-bool solve(State&, State&);
+std::vector<Move> valid_moves(const State&);
+State move_state(const State&, const Move&);
+std::vector<State> get_next_state(const State&);
+bool solve(const State&, const State&);
 
-
-
-#endif MANDCP_H
+#endif // MANDCP_H
