@@ -17,12 +17,12 @@ Write a program to solve the 8-queens problem. The goal of the 8-queens problem 
 
 ## Questions:
 ### Problem 1:
-> ### Solve the problem by search, starting from the initial state. Print the solution chessboard when found.
+> #### Solve the problem by search, starting from the initial state. Print the solution chessboard when found.
 ### Solution:
 Here is the solution for [N-Queens Problem](N-Queen.cpp).
 
 ### Problem 2:
-> ### Print the number of solutions to the problem.
+> #### Print the number of solutions to the problem.
 
 ### Output
 Output is given as below.
@@ -44,10 +44,10 @@ Total time taken: 6.3e-05 Sec
 =================================
 ```
 ### Problem 3:
-> ### Generalize your program to solve n queens problem. What is the maximum n that your program can solve in reasonable time (less than 30 mins).
+> #### Generalize your program to solve n queens problem. What is the maximum n that your program can solve in reasonable time (less than 30 mins).
 
 
-### The maximum n that my program can solve in 30 mins is 16.
+#### The maximum n that my program can solve in 30 mins is 16.
 - In this case of 16, I have not included the print solution.
 
 Here is the output for 16-Queens.
