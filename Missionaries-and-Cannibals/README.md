@@ -21,18 +21,18 @@
 3. **Run Makefile:**
    - Execute the following command to build the program using the Makefile.
 
-     ```bash
-     make
-     ```
+```bash
+make
+```
 
    This command compiles the code and generates the executable.
 
 4. **Run Executable:**
    - Once the `make` command completes successfully, run the generated executable from the terminal.
 
-    ```zsh
-    ./mission_cannibals
-    ```
+```zsh
+./mission_cannibals
+```
 
 ### Notes:
 - Ensure you have a C++ compiler installed (e.g., `g++` for GNU Compiler Collection).
