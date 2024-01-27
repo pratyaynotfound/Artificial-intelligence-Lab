@@ -9,10 +9,10 @@
 typedef std::pair<int, int> Move;
 
 struct State {
-    unsigned int numMissLeft;
-    unsigned int numCanbLeft;
-    unsigned int numMissRignt;
-    unsigned int numCanbRight;
+    int numMissLeft;
+    int numCanbLeft;
+    int numMissRignt;
+    int numCanbRight;
     bool boatAtLeft;
 
     bool operator==(const State& other) const {
@@ -36,6 +36,12 @@ struct State {
             return numCanbRight < other.numCanbRight;
         return boatAtLeft < other.boatAtLeft;
     }
+
+    friend std::ostream& operator<<(std::ostream& os, const State& state) {
+        os << "(" << state.numCanbLeft << ", " << state.numMissLeft << ", " << (state.boatAtLeft?"B":" ") << ") ("
+           << state.numCanbRight << ", " << state.numMissRignt << ", " << ((!state.boatAtLeft)?"B":" ") << ")";
+        return os;
+    }
 };
 
 // External declaration of global variables and functions
@@ -47,7 +53,6 @@ extern unsigned int tmoves;
 void initialize_moves();
 bool is_safe(const State&);
 bool is_goal(const State&);
-void print_state(const State&);
 unsigned int get_total_moves();
 
 std::vector<Move> valid_moves(const State&);

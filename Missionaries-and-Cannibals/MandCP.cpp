@@ -7,7 +7,7 @@ std::vector<Move> moves;
 
 // Initialize valid moves
 void initialize_moves() {
-    moves.push_back(std::make_pair(0, 1));
+    moves.push_back({0, 1});
     moves.push_back(std::make_pair(0, 2));
     moves.push_back(std::make_pair(1, 1));
     moves.push_back(std::make_pair(1, 0));
@@ -23,30 +23,24 @@ void initialize_moves() {
 
 // Check if the state is safe or not
 bool is_safe(const State& a) {
-    return !((a.numMissLeft!=0 && a.numMissLeft < a.numCanbLeft) ||
-             (a.numMissRignt!=0 && a.numMissRignt < a.numCanbRight) ||
-             a.numCanbLeft + a.numCanbRight > goal_state.numCanbRight + goal_state.numCanbLeft ||
-             a.numMissLeft + a.numMissRignt > goal_state.numMissRignt + goal_state.numMissLeft);
+    int totalMiss = a.numMissLeft + a.numMissRignt;
+    int totalCanb = a.numCanbLeft + a.numCanbRight;
+
+    return (
+        (a.numMissLeft == 0 || a.numMissLeft >= a.numCanbLeft) &&
+        (a.numMissRignt == 0 || a.numMissRignt >= a.numCanbRight) &&
+        totalMiss <= goal_state.numMissLeft + goal_state.numMissRignt &&
+        totalCanb <= goal_state.numCanbLeft + goal_state.numCanbRight &&
+        a.numCanbLeft >=0 &&
+        a.numCanbRight >= 0 &&
+        a.numMissLeft >= 0 &&
+        a.numMissRignt >= 0);
 }
+
 
 // Check if the state is the goal state
 bool is_goal(const State& g) {
     return g == goal_state;
-}
-
-// Print the state
-void print_state(const State& p) {
-    std::cout<<"========================"<<std::endl;
-    std::cout << "No of Missionaries at left: " << p.numMissLeft << std::endl;
-    std::cout << "No of Cannibals at left: " << p.numCanbLeft << std::endl;
-    std::cout << "No of Missionaries at Right: " << p.numMissRignt << std::endl;
-    std::cout << "No of Cannibals at Right: " << p.numCanbRight << std::endl;
-    if(p.boatAtLeft)
-        std::cout<<"Boat at Left."<<std::endl;
-    else
-        std::cout<<"Boat at Right."<<std::endl;
-    
-    std::cout<<"========================"<<std::endl;
 }
 
 // Get the total number of moves
@@ -122,12 +116,12 @@ std::vector<State> get_next_state(const State& p) {
 bool solve(const State& init, const State& goal) {
     initialize_moves();
     goal_state = goal;
-    std::queue<State> q;
+    std::queue<std::pair<State, int>> q;
     std::set<State> explored;
 
     // print_state(init); //debug
 
-    q.push(init);
+    q.push({init,0});
     explored.insert(init);
 
     //debug
@@ -140,19 +134,20 @@ bool solve(const State& init, const State& goal) {
     // }
 
     while (!q.empty()) {
-        State current = q.front();
+        State current = q.front().first;
+        int level = q.front().second;
         q.pop();
 
         if (is_goal(current)) {
-            print_state(current);
-            std::cout << "Goal state found!" << std::endl;
+            std::cout << current <<" Level: "<< level+1  << "\nGoal state found!\nTotal moves: "<< level << std::endl;
             return true;
         }
 
         std::vector<State> next_states = get_next_state(current);
         for (const auto& next_state : next_states) {
             if (explored.find(next_state) == explored.end()) {
-                q.push(next_state);
+                std::cout<< next_state << " Level: "<< level+1 <<std::endl;
+                q.push({next_state,level+1});
                 explored.insert(next_state);
             }
         }
