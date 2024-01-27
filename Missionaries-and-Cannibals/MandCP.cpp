@@ -139,7 +139,7 @@ bool solve(const State& init, const State& goal) {
         q.pop();
 
         if (is_goal(current)) {
-            std::cout << current <<" Level: "<< level+1  << "\nGoal state found!\nTotal moves: "<< level << std::endl;
+            std::cout "Goal state found!\nTotal moves: "<< level << std::endl;
             return true;
         }
 
