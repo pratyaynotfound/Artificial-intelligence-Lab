@@ -54,21 +54,21 @@ std::vector<Move> valid_moves(const State& current_state) {
     State temp;
     for (const auto& move : moves) {
         if (current_state.boatAtLeft) {
-            temp.numCanbLeft = current_state.numCanbLeft - move.first;
-            temp.numMissLeft = current_state.numMissLeft - move.second;
+            temp.numCanbLeft = current_state.numCanbLeft - move.second;
+            temp.numMissLeft = current_state.numMissLeft - move.first;
 
-            temp.numCanbRight = current_state.numCanbRight + move.first;
-            temp.numMissRignt = current_state.numMissRignt + move.second;
+            temp.numCanbRight = current_state.numCanbRight + move.second;
+            temp.numMissRignt = current_state.numMissRignt + move.first;
 
             if (is_safe(temp)) {
                 valid_move.push_back(move);
             }
         } else {
-            temp.numCanbLeft = current_state.numCanbLeft + move.first;
-            temp.numMissLeft = current_state.numMissLeft + move.second;
+            temp.numCanbLeft = current_state.numCanbLeft + move.second;
+            temp.numMissLeft = current_state.numMissLeft + move.first;
 
-            temp.numCanbRight = current_state.numCanbRight - move.first;
-            temp.numMissRignt = current_state.numMissRignt - move.second;
+            temp.numCanbRight = current_state.numCanbRight - move.second;
+            temp.numMissRignt = current_state.numMissRignt - move.first;
 
             if (is_safe(temp)) {
                 valid_move.push_back(move);
@@ -82,19 +82,19 @@ std::vector<Move> valid_moves(const State& current_state) {
 State move_state(const State& current, const Move& this_move) {
     State temp_move;
     if (current.boatAtLeft) {
-        temp_move.numCanbLeft = current.numCanbLeft - this_move.first;
-        temp_move.numMissLeft = current.numMissLeft - this_move.second;
+        temp_move.numCanbLeft = current.numCanbLeft - this_move.second;
+        temp_move.numMissLeft = current.numMissLeft - this_move.first;
 
-        temp_move.numCanbRight = current.numCanbRight + this_move.first;
-        temp_move.numMissRignt = current.numMissRignt + this_move.second;
+        temp_move.numCanbRight = current.numCanbRight + this_move.second;
+        temp_move.numMissRignt = current.numMissRignt + this_move.first;
 
         temp_move.boatAtLeft = !current.boatAtLeft;
     } else {
-        temp_move.numCanbLeft = current.numCanbLeft + this_move.first;
-        temp_move.numMissLeft = current.numMissLeft + this_move.second;
+        temp_move.numCanbLeft = current.numCanbLeft + this_move.second;
+        temp_move.numMissLeft = current.numMissLeft + this_move.first;
 
-        temp_move.numCanbRight = current.numCanbRight - this_move.first;
-        temp_move.numMissRignt = current.numMissRignt - this_move.second;
+        temp_move.numCanbRight = current.numCanbRight - this_move.second;
+        temp_move.numMissRignt = current.numMissRignt - this_move.first;
 
          temp_move.boatAtLeft = !current.boatAtLeft;
     }

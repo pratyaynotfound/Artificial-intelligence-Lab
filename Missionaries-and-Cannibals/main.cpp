@@ -3,9 +3,10 @@
 #define numMiss 3
 
 int main(){
-    State initialState = {numCanb, numMiss, 0, 0, true};
-    State goalState = {0, 0, numCanb, numMiss, false};
+    State initialState = {numMiss, numCanb, 0, 0, true};
+    State goalState = {0, 0, numMiss, numCanb, false};
 
+    // std::cout<<goalState;
     std::cout<<"Initial State: \n"<<initialState << " Level: 0"<<std::endl;
     solve(initialState,goalState);
 }

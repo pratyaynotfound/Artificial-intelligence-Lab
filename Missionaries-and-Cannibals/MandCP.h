@@ -37,8 +37,8 @@ struct State {
     }
 
     friend std::ostream& operator<<(std::ostream& os, const State& state) {
-        os << "(" << state.numCanbLeft << ", " << state.numMissLeft << ", " << (state.boatAtLeft?"B":" ") << ") ("
-           << state.numCanbRight << ", " << state.numMissRignt << ", " << ((!state.boatAtLeft)?"B":" ") << ")";
+        os << "(" << state.numMissLeft << ", " << state.numCanbLeft << ", " << (state.boatAtLeft?"1":"0") << ") ("
+           << state.numMissRignt << ", " << state.numCanbRight << ", " << ((!state.boatAtLeft)?"1":"0") << ")";
         return os;
     }
 };
