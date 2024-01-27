@@ -60,7 +60,9 @@ A state can be represented as a tuple (M, C, B).
 
 Actions:
 (m, c): Move m missionaries and c cannibals across the river.
+
 Here is teh state space tree:
+
 ![State Space Tree](graphviz.svg)
 
 
