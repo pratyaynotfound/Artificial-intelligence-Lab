@@ -93,7 +93,6 @@ Initial State:
 (0, 2, 1) (3, 1, 0) Level: 10
 (1, 1, 1) (2, 2, 0) Level: 10
 (0, 0, 0) (3, 3, 1) Level: 11
-(0, 0, 0) (3, 3, 1) Level: 12
 Goal state found!
 Total moves: 11
 ```
