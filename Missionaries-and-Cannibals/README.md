@@ -1,5 +1,43 @@
 # Assignment Problem 2: Missionaries and Cannibals Problem
 
+## Missionaries and Cannibals Problem - Execution Instructions
+
+### Files:
+
+- [Makefile](makefile)
+- [MandCP.h](MandCP.h)
+- [MandCP.cpp](MandCP.cpp)
+- [main.cpp](main.cpp)
+
+### Instructions:
+
+1. **Download Files:**
+   - Download the files [Makefile](makefile), [MandCP.h](MandCP.h), [MandCP.cpp](MandCP.cpp), and [main.cpp](main.cpp).
+   - Place all files in a directory of your choice.
+
+2. **Open Terminal or Command Prompt:**
+   - Open a terminal or command prompt in the directory where you placed the files.
+
+3. **Run Makefile:**
+   - Execute the following command to build the program using the Makefile.
+
+     ```bash
+     make
+     ```
+
+   This command compiles the code and generates the executable.
+
+4. **Run Executable:**
+   - Once the `make` command completes successfully, run the generated executable from the terminal.
+
+    ```zsh
+    ./mission_cannibals
+    ```
+
+### Notes:
+- Ensure you have a C++ compiler installed (e.g., `g++` for GNU Compiler Collection).
+- Check the Makefile for any specific instructions or dependencies.
+- If you encounter issues, review error messages or share them for further assistance.
 
 ## Problem Description
 
