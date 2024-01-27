@@ -60,12 +60,16 @@ A state can be represented as a tuple (M, C, B).
 
 Actions:
 (m, c): Move m missionaries and c cannibals across the river.
+Here is teh state space tree:
+![State Space Tree](graphviz.svg)
 
 
 ### Problem 2:
 > #### Implement and solve the problem optimally using an appropriate search algorithm. Is it a good idea to check for repeated states?
 
 Here is the solution for [Missionaries and Cannibals Problem](main.cpp).
+
+BFS can handle the repeated state space by including all the unique states in a set and check if the state is already visited or not.
 
 ### Output
 
