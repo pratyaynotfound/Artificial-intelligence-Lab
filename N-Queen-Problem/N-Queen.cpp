@@ -56,6 +56,8 @@ bool isSafe(int (&board)[N], int row, int col) {
 }
 
 bool solveNQ(int (&board)[N], int row) {
+
+    //If all queens placed return true
     if (row == N) {
         printSol(board);
         count++;

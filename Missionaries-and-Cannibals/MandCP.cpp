@@ -8,10 +8,10 @@ std::vector<Move> moves;
 // Initialize valid moves
 void initialize_moves() {
     moves.push_back({0, 1});
-    moves.push_back(std::make_pair(0, 2));
-    moves.push_back(std::make_pair(1, 1));
-    moves.push_back(std::make_pair(1, 0));
-    moves.push_back(std::make_pair(2, 0));
+    moves.push_back({0, 2});
+    moves.push_back({1, 1});
+    moves.push_back({1, 0});
+    moves.push_back({2, 0});
 
     //for 4,4 and 5,5 and boat space = 3
     
