@@ -11,15 +11,9 @@ The missionaries and cannibals problem is usually stated as follows. Three missi
 
 ##  Solution:
 ### Problem 1:
-> ### Formulate the problem precisely, making only those distinctions necessary to ensure a valid solution. Draw a diagram of the complete state space.
+> #### Formulate the problem precisely, making only those distinctions necessary to ensure a valid solution. Draw a diagram of the complete state space.
 
-
-### Problem 2:
-> ### Implement and solve the problem optimally using an appropriate search algorithm. Is it a good idea to check for repeated states?
-
-Here is the solution for [Missionaries and Cannibals Problem](main.cpp).
-
-### Output
+#### Problem Formulation:
 - M: Number of missionaries on the left side of the river.
 - C: Number of cannibals on the left side of the river.
 - B: Boat position (B is boat is present, for the left tuple if there is B then boat is on the left side and if blank then the boat is on the right side and and for the right side vise versa).
@@ -28,6 +22,14 @@ A state can be represented as a tuple (M, C, B).
 
 Actions:
 (m, c): Move m missionaries and c cannibals across the river.
+
+
+### Problem 2:
+> #### Implement and solve the problem optimally using an appropriate search algorithm. Is it a good idea to check for repeated states?
+
+Here is the solution for [Missionaries and Cannibals Problem](main.cpp).
+
+### Output
 
 Output is given as below.
 ```bash
@@ -53,7 +55,7 @@ Total moves: 11
 ```
 
 ### Problem 3:
-> ### Why do you think people have a hard time solving this puzzle, given that the state space is so simple?
+> #### Why do you think people have a hard time solving this puzzle, given that the state space is so simple?
 
 In my opinion, the problem is not difficult to solve. When I finally understood the state space representation, which had been confusing me, the task became simple for me.
 
