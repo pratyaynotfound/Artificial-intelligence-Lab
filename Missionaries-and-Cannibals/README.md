@@ -72,22 +72,22 @@ Here is the solution for [Missionaries and Cannibals Problem](main.cpp).
 Output is given as below.
 ```bash
 Initial State: 
-(3, 3, B) (0, 0,  ) Level: 0
-(2, 2,  ) (1, 1, B) Level: 1
-(2, 3,  ) (1, 0, B) Level: 1
-(1, 3,  ) (2, 0, B) Level: 1
-(2, 3, B) (1, 0,  ) Level: 2
-(0, 3,  ) (3, 0, B) Level: 3
-(1, 3, B) (2, 0,  ) Level: 4
-(1, 1,  ) (2, 2, B) Level: 5
-(2, 2, B) (1, 1,  ) Level: 6
-(2, 0,  ) (1, 3, B) Level: 7
-(3, 0, B) (0, 3,  ) Level: 8
-(1, 0,  ) (2, 3, B) Level: 9
-(1, 1, B) (2, 2,  ) Level: 10
-(2, 0, B) (1, 3,  ) Level: 10
-(0, 0,  ) (3, 3, B) Level: 11
-(0, 0,  ) (3, 3, B) Level: 12
+(3, 3, 1) (0, 0, 0) Level: 0
+(3, 2, 0) (0, 1, 1) Level: 1
+(3, 1, 0) (0, 2, 1) Level: 1
+(2, 2, 0) (1, 1, 1) Level: 1
+(3, 2, 1) (0, 1, 0) Level: 2
+(3, 0, 0) (0, 3, 1) Level: 3
+(3, 1, 1) (0, 2, 0) Level: 4
+(1, 1, 0) (2, 2, 1) Level: 5
+(2, 2, 1) (1, 1, 0) Level: 6
+(0, 2, 0) (3, 1, 1) Level: 7
+(0, 3, 1) (3, 0, 0) Level: 8
+(0, 1, 0) (3, 2, 1) Level: 9
+(0, 2, 1) (3, 1, 0) Level: 10
+(1, 1, 1) (2, 2, 0) Level: 10
+(0, 0, 0) (3, 3, 1) Level: 11
+(0, 0, 0) (3, 3, 1) Level: 12
 Goal state found!
 Total moves: 11
 ```
