@@ -25,7 +25,6 @@ struct State {
     }
 
     bool operator<(const State& other) const {
-        // You can choose any criteria for ordering State objects here
         if (numMissLeft != other.numMissLeft)
             return numMissLeft < other.numMissLeft;
         if (numMissRignt != other.numMissRignt)
