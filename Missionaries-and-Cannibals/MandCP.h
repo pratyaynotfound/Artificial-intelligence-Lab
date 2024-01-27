@@ -24,19 +24,6 @@ struct State {
             boatAtLeft == other.boatAtLeft);
     }
 
-    bool operator<(const State& other) const {
-        // You can choose any criteria for ordering State objects here
-        if (numMissLeft != other.numMissLeft)
-            return numMissLeft < other.numMissLeft;
-        if (numMissRignt != other.numMissRignt)
-            return numMissRignt < other.numMissRignt;
-        if (numCanbLeft != other.numCanbLeft)
-            return numCanbLeft < other.numCanbLeft;
-        if (numCanbRight != other.numCanbRight)
-            return numCanbRight < other.numCanbRight;
-        return boatAtLeft < other.boatAtLeft;
-    }
-
     friend std::ostream& operator<<(std::ostream& os, const State& state) {
         os << "(" << state.numCanbLeft << ", " << state.numMissLeft << ", " << (state.boatAtLeft?"B":" ") << ") ("
            << state.numCanbRight << ", " << state.numMissRignt << ", " << ((!state.boatAtLeft)?"B":" ") << ")";
