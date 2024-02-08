@@ -1,29 +1,29 @@
 #include "ftnPuzzle.h"
 
-int rMax,cMax;
-State goal,init;
-int row[] = {1,0,-1,0};
-int col[] = {0,1,0,-1};
+int rMax, cMax;
+State goal, init;
+int row[] = {1, 0, -1, 0};
+int col[] = {0, 1, 0, -1};
 
-bool State::operator==(const State& other) const {
-    return (Matrix == other.Matrix);
-}
+// bool State::operator==(const State &other) const {
+//     return (Matrix == other.Matrix);
+// }
 
-
-ostream& operator<<(ostream& os, const State& a) {
-    for (auto i : a.Matrix) {
-        for (auto j : i) {
-            os << j << " ";
+ostream &operator<<(ostream &os, const State &a) {
+    for (int i = 0; i < rMax; ++i) {
+        for (int j = 0; j < cMax; ++j) {
+            os << a.Matrix[i * cMax + j] << " ";
         }
         os << "\n";
     }
     return os;
 }
-bool State::operator<(const State& other) const {
-    return f>other.f;
+
+bool State::operator<(const State &other) const {
+    return f > other.f;
 }
 
-bool State::is_goal(){
+bool State::is_goal() {
     return this->Matrix == goal.Matrix;
 }
 
@@ -32,9 +32,9 @@ bool is_safe(int row, int col) {
 }
 
 Pair State::find_empty() {
-    for (int i = 0; i < (*this).Matrix.size(); ++i) {
-        for (int j = 0; j < (*this).Matrix[i].size(); ++j) {
-            if ((*this).Matrix[i][j] == 0) {
+    for (int i = 0; i < rMax; ++i) {
+        for (int j = 0; j < cMax; ++j) {
+            if (Matrix[i * cMax + j] == 0) {
                 return make_pair(i, j);
             }
         }
@@ -45,89 +45,108 @@ Pair State::find_empty() {
 Pair findInGoal(int key) {
     for (int i = 0; i < rMax; i++) {
         for (int j = 0; j < cMax; j++) {
-            if (key == goal.Matrix[i][j])
+            if (key == goal.Matrix[i*cMax+j])
                 return {i, j};
         }
     }
     return {-1, -1};
 }
 
-int huristic(State& this_state) {
+//returns true if the element is found in the vector of states, false otherwise
+bool find(std::vector<State> &vect,State& suc){
+    for(auto it = vect.begin();it!=vect.end();it++){
+        if((*it).Matrix == suc.Matrix){
+            return true;
+        }
+    }
+    return false;
+}
+
+int huristic(State &this_state) {
     int mhtnDist = 0;
     for (int i = 0; i < rMax; i++) {
         for (int j = 0; j < cMax; j++) {
-            Pair posInGoal = findInGoal(this_state.Matrix[i][j]);
+            Pair posInGoal = findInGoal(this_state.Matrix[i * cMax + j]);
             if (posInGoal.first == -1 || posInGoal.second == -1) {
                 std::cout << "Position in goal not found!\nAborting Process...\n";
                 exit(0);
             }
-            mhtnDist = mhtnDist + (abs(i - posInGoal.first) + abs(j - posInGoal.second));
+            mhtnDist = mhtnDist + abs(i-posInGoal.first) + abs(j-posInGoal.second);
         }
     }
     return mhtnDist;
 }
 
-void State::generate_children(vector<State>& successors){
-
+void State::generate_children(std::vector<State> &successors) {
+    Pair empty_pos = find_empty();
     for (int i = 0; i < 4; i++) {
-        Pair empty_pos = (*this).find_empty();
         int newRow = empty_pos.first + row[i];
         int newCol = empty_pos.second + col[i];
 
         if (is_safe(newRow, newCol)) {
             State successorState = *this;
-
-            swap(successorState.Matrix[empty_pos.first][empty_pos.second],
-                 successorState.Matrix[newRow][newCol]);
+            swap(successorState.Matrix[empty_pos.first * cMax + empty_pos.second],
+                 successorState.Matrix[newRow * cMax + newCol]);
 
             successors.push_back(successorState);
         }
     }
 }
+template <typename T>
+void printPriorityQueue(const std::priority_queue<T>& pq) {
+    std::priority_queue<T> copy = pq;  // Create a copy of the original priority queue
 
-// Implement the remaining functions as needed...
+    // Print elements from the copy
+    while (!copy.empty()) {
+        std::cout << copy.top()<<"Huristics: "<<copy.top().f <<"\n\n";
+        copy.pop();
+    }
+}
 
-void solveAstar(State& initial,State& goal_s,int maxR,int maxC){
+void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
     init = initial;
     goal = goal_s;
 
     rMax = maxR;
     cMax = maxC;
 
-    //debug
-    // std::cout<<initial<<std::endl;
-    // for(auto child: initial.generate_children())
-    //     std::cout<<child<<std::endl;
-
-    priority_queue<State> pq;
-    std::set<State> visited;
+    priority_queue<State> pq; 
+    std::vector<State> visited;
     pq.push(init);
-    visited.insert(init);
+    visited.push_back(init);
     int count_iters = 0;
 
-    while(!pq.empty()){
+    std::cout << "Initial ###\n" << initial << std::endl;
+
+    while (!pq.empty()) {
         count_iters++;
+        // std::sort(pq.begin(),pq.end());
         State current_state = pq.top();
+        printPriorityQueue(pq);
+        std::cout<<"Hval: "<< current_state.h<<"\n";
         pq.pop();
 
-        if(current_state.is_goal()){
-            std::cout<<"Goal found!\n"<<current_state<<std::endl;
-            std::cout<<"Total no of Iterations: "<<count_iters<<std::endl;
+        if (current_state.is_goal()) {
+            std::cout << "Goal found!\n" << current_state << std::endl;
+            std::cout << "Total no of Iterations: " << count_iters << std::endl;
             break;
         }
 
-        std::vector<State> succssors;
-        current_state.generate_children(succssors);
-        for(auto& successor: succssors){
-            if(visited.find(successor) != visited.end()){
+
+        std::vector<State> successors;
+        current_state.generate_children(successors);
+        visited.push_back(current_state);
+
+        for (auto successor : successors) {
+            if (!find(visited,successor)) {
+                // std::cout<<"Here!";
                 successor.g = current_state.g + 1;
                 successor.h = huristic(successor);
                 successor.f = successor.g + successor.h;
-                // successor.parent = &current_state;
 
                 pq.push(successor);
-                visited.insert(successor);
             }
         }
+        std::cout << "\n=========================================\n";
     }
 }
