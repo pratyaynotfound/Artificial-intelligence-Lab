@@ -6,21 +6,20 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <set>
-#include <bits/stdc++.h>
-using namespace std;
 
-typedef pair<int, int> Pair;
+typedef std::pair<int, int> Pair;
 
 class State{
     public:
     std::vector<int> Matrix;
     int g,h,f;
-    // State* parent;
-    friend ostream& operator<<(ostream&, const State&);
+    State* parent;
+    friend std::ostream& operator<<(std::ostream&, const State&);
 
     State(){};
-    State(std::vector<int> matr,int g, int h, int f):Matrix(matr),g(g),h(h),f(f){};
+    State(std::vector<int> matr,int g, int h, int f):Matrix(matr),g(g),h(h),f(f){
+        parent = nullptr;
+    };
     void generate_children(std::vector<State>&);
     Pair find_empty();
     bool is_goal();

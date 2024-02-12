@@ -9,10 +9,10 @@ int col[] = {0, 1, 0, -1};
 //     return (Matrix == other.Matrix);
 // }
 
-ostream &operator<<(ostream &os, const State &a) {
+std::ostream &operator<<(std::ostream &os, const State &a) {
     for (int i = 0; i < rMax; ++i) {
         for (int j = 0; j < cMax; ++j) {
-            os << a.Matrix[i * cMax + j] << " ";
+            os << a.Matrix[i * cMax + j] << "\t";
         }
         os << "\n";
     }
@@ -20,7 +20,7 @@ ostream &operator<<(ostream &os, const State &a) {
 }
 
 bool State::operator<(const State &other) const {
-    return f > other.f;
+    return f >= other.f;
 }
 
 bool State::is_goal() {
@@ -35,7 +35,7 @@ Pair State::find_empty() {
     for (int i = 0; i < rMax; ++i) {
         for (int j = 0; j < cMax; ++j) {
             if (Matrix[i * cMax + j] == 0) {
-                return make_pair(i, j);
+                return std::make_pair(i, j);
             }
         }
     }
@@ -74,33 +74,38 @@ int huristic(State &this_state) {
             mhtnDist = mhtnDist + abs(i-posInGoal.first) + abs(j-posInGoal.second);
         }
     }
+    // for(int i = 0;i<rMax*cMax;i++){
+    //     if(this_state.Matrix[i]!=goal.Matrix[i] && this_state.Matrix[i]!=0)
+    //         mhtnDist++;
+    // }
     return mhtnDist;
 }
 
-void State::generate_children(std::vector<State> &successors) {
-    Pair empty_pos = find_empty();
+void State::generate_children(std::vector<State>& children) {
+    Pair emptyPos = find_empty();
     for (int i = 0; i < 4; i++) {
-        int newRow = empty_pos.first + row[i];
-        int newCol = empty_pos.second + col[i];
+        int newX = emptyPos.first + row[i];
+        int newY = emptyPos.second + col[i];
 
-        if (is_safe(newRow, newCol)) {
-            State successorState = *this;
-            swap(successorState.Matrix[empty_pos.first * cMax + empty_pos.second],
-                 successorState.Matrix[newRow * cMax + newCol]);
+        if (is_safe(newX, newY)) {
+            State child(*this);
+            std::swap(child.Matrix[emptyPos.first * cMax + emptyPos.second],
+                 child.Matrix[newX * cMax + newY]);
+            child.g++;
+            child.h = huristic(child);
+            child.f = child.g + child.h;
 
-            successors.push_back(successorState);
+            children.push_back(child);
         }
     }
 }
 template <typename T>
 void printPriorityQueue(const std::priority_queue<T>& pq) {
-    std::priority_queue<T> copy = pq;  // Create a copy of the original priority queue
-
+    std::priority_queue<T> copy = pq;
     // Print elements from the copy
-    while (!copy.empty()) {
-        std::cout << copy.top()<<"Huristics: "<<copy.top().f <<"\n\n";
-        copy.pop();
-    }
+    std::cout << copy.top()<<"Huristics: "<<copy.top().f <<"\n\n";
+    copy.pop();
+    
 }
 
 void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
@@ -110,10 +115,9 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
     rMax = maxR;
     cMax = maxC;
 
-    priority_queue<State> pq; 
+    std::priority_queue<State> pq; 
     std::vector<State> visited;
     pq.push(init);
-    visited.push_back(init);
     int count_iters = 0;
 
     std::cout << "Initial ###\n" << initial << std::endl;
@@ -123,7 +127,7 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
         // std::sort(pq.begin(),pq.end());
         State current_state = pq.top();
         printPriorityQueue(pq);
-        std::cout<<"Hval: "<< current_state.h<<"\n";
+        std::cout<<"Gval: "<< current_state.g<<"\n";
         pq.pop();
 
         if (current_state.is_goal()) {
@@ -131,20 +135,14 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
             std::cout << "Total no of Iterations: " << count_iters << std::endl;
             break;
         }
-
-
+    
         std::vector<State> successors;
         current_state.generate_children(successors);
         visited.push_back(current_state);
 
-        for (auto successor : successors) {
-            if (!find(visited,successor)) {
-                // std::cout<<"Here!";
-                successor.g = current_state.g + 1;
-                successor.h = huristic(successor);
-                successor.f = successor.g + successor.h;
-
-                pq.push(successor);
+        for (State& child : successors) {
+            if (!find(visited,child)) {
+                pq.push(child);
             }
         }
         std::cout << "\n=========================================\n";
