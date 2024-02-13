@@ -12,7 +12,9 @@ int main()
         inpur_arr.push_back(num);
     }
     State initial(inpur_arr);
+    
     std::vector<int> goal_vec;
+
     if( n == 4)
         goal_vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     else

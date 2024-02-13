@@ -120,7 +120,6 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
 
     while (!pq.empty()) {
         count_iters++;
-        // std::sort(pq.begin(),pq.end());
         State current_state = pq.top();
         std::cout<<current_state;
         pq.pop();

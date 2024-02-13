@@ -28,8 +28,6 @@ class State{
     bool operator<(const State&) const;
 };
 
-
-
 extern int row[];
 extern int col[];
 extern int rMax, cMax;
@@ -40,5 +38,6 @@ bool find(std::vector<State> &,State&);
 int huristic(State&);
 Pair findInGoal(int);
 void solveAstar(State &,State &,int,int);
+
 
 #endif
