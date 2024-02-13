@@ -5,17 +5,14 @@ State goal, init;
 int row[] = {1, 0, -1, 0};
 int col[] = {0, 1, 0, -1};
 
-// bool State::operator==(const State &other) const {
-//     return (Matrix == other.Matrix);
-// }
-
 std::ostream &operator<<(std::ostream &os, const State &a) {
     for (int i = 0; i < rMax; ++i) {
-        for (int j = 0; j < cMax; ++j) {
-            os << a.Matrix[i * cMax + j] << "\t";
+        for(int j = 0;j < cMax;j++){
+            os << a.Matrix[i*cMax+j]<<"\t";
         }
-        os << "\n";
+        std::cout<<"\n";
     }
+    std::cout<<"\n";
     return os;
 }
 
@@ -74,10 +71,6 @@ int huristic(State &this_state) {
             mhtnDist = mhtnDist + abs(i-posInGoal.first) + abs(j-posInGoal.second);
         }
     }
-    // for(int i = 0;i<rMax*cMax;i++){
-    //     if(this_state.Matrix[i]!=goal.Matrix[i] && this_state.Matrix[i]!=0)
-    //         mhtnDist++;
-    // }
     return mhtnDist;
 }
 
@@ -122,17 +115,20 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
 
     std::cout << "Initial ###\n" << initial << std::endl;
 
+    std::vector<State> successors;
+    initial.generate_children(successors);
+
     while (!pq.empty()) {
         count_iters++;
         // std::sort(pq.begin(),pq.end());
         State current_state = pq.top();
-        printPriorityQueue(pq);
-        std::cout<<"Gval: "<< current_state.g<<"\n";
+        std::cout<<current_state;
         pq.pop();
 
         if (current_state.is_goal()) {
             std::cout << "Goal found!\n" << current_state << std::endl;
             std::cout << "Total no of Iterations: " << count_iters << std::endl;
+            std::cout << "Height: "<< current_state.g<<"\nPath:\n";
             break;
         }
     
@@ -145,6 +141,5 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
                 pq.push(child);
             }
         }
-        std::cout << "\n=========================================\n";
     }
 }

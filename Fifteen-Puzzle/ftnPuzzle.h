@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <unordered_set>
 
 typedef std::pair<int, int> Pair;
 
@@ -13,17 +14,17 @@ class State{
     public:
     std::vector<int> Matrix;
     int g,h,f;
-    State* parent;
     friend std::ostream& operator<<(std::ostream&, const State&);
 
     State(){};
-    State(std::vector<int> matr,int g, int h, int f):Matrix(matr),g(g),h(h),f(f){
-        parent = nullptr;
+    State(std::vector<int> matr):Matrix(matr){
+        g = 0;
+        f = 0;
+        h = 0;
     };
     void generate_children(std::vector<State>&);
     Pair find_empty();
     bool is_goal();
-    // bool operator==(const State&) const;
     bool operator<(const State&) const;
 };
 
