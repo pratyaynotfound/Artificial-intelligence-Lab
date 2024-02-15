@@ -1,5 +1,14 @@
 #include "TSP.h"
 
+bool PathState::operator<(const PathState& other) const{
+    return estimate > other.estimate;
+}
+
+std::ostream& operator<<(std::ostream &os,std::vector<int> node){
+    for(int i = 6;i<node.size();i++){
+        os<<node[i]+1<<"\t";
+    }
+}
 
 void inputGraph(Graph& G,int &v){
     std::cout<<"Enter the number of vertices and edges:"<<std::endl;
@@ -17,7 +26,9 @@ void inputGraph(Graph& G,int &v){
 }
 
 int heuMST(const std::vector<int> node, Graph& G){
-    int num_v = boost::num_vertices(G), p = node.size()-6, l = 1000;
+    int num_v = boost::num_vertices(G);
+    int p = node.size()-6;
+    int l = 1000;
     Graph H(num_v);
 
     EWM weight_map = boost::get(boost::edge_weight, G);
@@ -27,6 +38,7 @@ int heuMST(const std::vector<int> node, Graph& G){
             boost::add_edge(i,j,weight_map[boost::edge(i,j,G).first],H);
         }
     }
+    
     if(node.size() == 8){
         auto e = boost::edge(node[6],node[7],H);
         boost::put(boost::edge_weight,H,e.first,l);
@@ -56,16 +68,17 @@ int heuMST(const std::vector<int> node, Graph& G){
 }   
 
 void generate_successors(std::vector<int>& node,std::set<std::vector<int>>& succ,Graph& g){
-    bool present;
+    bool present = false;
 
     int uid = node[3];
     int n = boost::num_vertices(g);
 
-    for(int v = 0;v<n;v++){
-        for(int i = 6;i<node.size();i++){
+    for(int v = 0; v < n ; v++){
+        for(int i = 6;i < node.size(); i++){
             if(v == node[i])
                 present = true;
         }
+        
         if(!present){
             std::vector<int> new_n(node.size()+1);
 
@@ -86,17 +99,12 @@ void generate_successors(std::vector<int>& node,std::set<std::vector<int>>& succ
     }
 }
 
-std::ostream& operator<<(std::ostream &os,std::vector<int> node){
-    for(int i = 6;i<node.size();i++){
-        os<<node[i]+1<<"\t";
-    }
-}
-
 bool AstarTSP(Graph& G,std::vector<int>& root,int v){
     std::priority_queue<std::vector<int>> frontier;
     std::set<std::vector<int>> visited;
 
     frontier.push(root);
+    
     while(!frontier.empty()){
         std::vector<int> N = frontier.top();
         frontier.pop();

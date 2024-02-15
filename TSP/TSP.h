@@ -19,12 +19,8 @@ struct PathState{
     std::vector<int> visited;
     int cost;
     int estimate;
-
-    //for pq min heap
-    bool operator<(const PathState& other) const{
-        return estimate > other.estimate;
-    }
-};
+    bool operator<(const PathState&) const;
+}
 
 std::ostream& operator<<(std::ostream &,std::vector<int>);
 
