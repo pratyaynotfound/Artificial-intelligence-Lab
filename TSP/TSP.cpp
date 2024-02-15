@@ -1,6 +1,6 @@
 #include "TSP.h"
 
-bool operator<(const PathState& other) const{
+bool PathState::operator<(const PathState& other) const{
     return estimate > other.estimate;
 }
 
