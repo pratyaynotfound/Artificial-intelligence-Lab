@@ -3,8 +3,6 @@
 
 int main(){
     int v;
-    
-
     Graph G(v);
     std::vector<Edge> mstE;
     int mstW = 0;
@@ -20,5 +18,4 @@ int main(){
         std::cout<<"Solution not found!!"<<std::endl;
     }
     return 0;
-
 }
