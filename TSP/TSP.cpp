@@ -1,5 +1,9 @@
 #include "TSP.h"
 
+bool operator<(const PathState& other) const{
+    return estimate > other.estimate;
+}
+
 std::ostream& operator<<(std::ostream &os,std::vector<int> node){
     for(int i = 6;i<node.size();i++){
         os<<node[i]+1<<"\t";
