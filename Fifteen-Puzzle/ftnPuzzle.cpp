@@ -113,7 +113,7 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
     pq.push(init);
     int count_iters = 0;
 
-    std::cout << "Initial ###\n" << initial << std::endl;
+    std::cout << "Initial\n" << initial << std::endl;
 
     std::vector<State> successors;
     initial.generate_children(successors);
@@ -121,13 +121,13 @@ void solveAstar(State &initial, State &goal_s, int maxR, int maxC) {
     while (!pq.empty()) {
         count_iters++;
         State current_state = pq.top();
-        std::cout<<current_state;
+        // std::cout<<current_state;
         pq.pop();
 
         if (current_state.is_goal()) {
             std::cout << "Goal found!\n" << current_state << std::endl;
             std::cout << "Total no of Iterations: " << count_iters << std::endl;
-            std::cout << "Height: "<< current_state.g<<"\nPath:\n";
+            std::cout << "Height: "<< current_state.g<<std::endl;
             break;
         }
     
