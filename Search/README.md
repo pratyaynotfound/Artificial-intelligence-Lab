@@ -3,7 +3,7 @@ GeneString.py
 
 The GeneString.py script is designed to solve a genetic string optimization problem using a branch and bound search algorithm. Below is an overview of the script and its functionalities.
 
-Problem Statement: [ProblemStatement]()
+Problem Statement: [Problem Statement](Search/A1.pdf)
 
 Functionality Overview
 ----------------------
