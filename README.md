@@ -15,7 +15,7 @@ This repository contains solutions for lab assignments related to the COM 4211 -
 
 ## Assignments
 
-- ### Assignment 1: N-Queens Problem
+### Assignment 1: N-Queens Problem
 
 #### Problem Specifications
 
