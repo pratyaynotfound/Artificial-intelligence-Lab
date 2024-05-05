@@ -19,6 +19,7 @@
 (declare-fun x336 () Bool)
 (declare-fun x316 () Bool)
 (declare-fun x226 () Bool)
+
 ; move constraints with avoiding mines
 (assert (=> x110 x121))
 (assert (=> x121 x222))
@@ -27,9 +28,11 @@
 (assert (=> x323 (or x334 x314)))
 (assert (=> x314 x325))
 (assert (=> x325 x336)) 
+
 ; destination constraint
 (assert (or (or x334 x335) x336 ))
 (assert x110) 
+
 (check-sat)
 (get-model)
 (exit)
