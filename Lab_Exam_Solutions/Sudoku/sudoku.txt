@@ -1,0 +1,6 @@
+You are given an instance of Sudoku that can be solved by the inferencing algorithm AC3. 
+The sudoku problem is created in sudoku.py file and it invokes AC3 method in csp.py file.
+Your task is to implement AC3 method. Verify your implementation by checking that the 
+given problem instance is solved by AC3.
+
+ 

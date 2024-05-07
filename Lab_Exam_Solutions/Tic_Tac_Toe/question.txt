@@ -1,0 +1,2 @@
+Implement the marked routines in games.py file to implement the minimax algorithm. The minmax player in games.py will select moves using your routines to play tic-tac-toe against a human opponent. The minimax player plays with 'X' whereas the human opponent plays with a 'O'. Test your implementation to verify that the minimax player using your implemented minimax algorithm always wins or draws against the opponent.
+ 
